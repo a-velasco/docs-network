@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Documentation Network Graph</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html, body, #container {
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        font-family: system-ui, -apple-system, sans-serif;
+      }
+      #container {
+        position: relative;
+        background: #ebe9e9;
+      }
+
+      /* Floating Overlay UI Controls */
+      .controls-overlay {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        z-index: 10;
+      }
+
+      .btn {
+        padding: 8px 14px;
+        background: #ffffff;
+        border: 1px solid #cccccc;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 13px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        transition: background 0.2s;
+      }
+      .btn:hover { background: #f0f0f0; }
+      .btn.active {
+        background: #E95420;
+        color: white;
+        border-color: #E95420;
+      }
+
+      /* Community Buttons Sidebar */
+      .community-panel {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        z-index: 10;
+        max-height: calc(100vh - 32px);
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 12px;
+        border-radius: 6px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      }
+      .community-btn {
+        padding: 6px 10px;
+        background: #ffffff;
+        border: 2px solid #888;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 12px;
+        text-align: left;
+        font-weight: 500;
+      }
+      .community-btn:hover { background: #f5f5f5; }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div class="controls-overlay">
+        <button id="forceatlas2" class="btn">Start Force Atlas 2</button>
+      </div>
+      <div id="community-panel" class="community-panel"></div>
+    </div>
+    <script type="module" src="/main.ts"></script>
+  </body>
+</html>

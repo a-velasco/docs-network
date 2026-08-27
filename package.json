@@ -1,0 +1,25 @@
+{
+  "name": "docs-network",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@sigma/layer-webgl": "^3.0.0",
+    "@sigma/node-square": "^3.0.0",
+    "@sigma/utils": "^3.0.0",
+    "graphology": "^0.26.0",
+    "graphology-communities-louvain": "^2.0.2",
+    "graphology-layout": "^0.6.1",
+    "graphology-layout-forceatlas2": "^0.10.1",
+    "iwanthue": "^2.0.0",
+    "sigma": "^3.0.3"
+  },
+  "devDependencies": {
+    "typescript": "^6.0.3",
+    "vite": "8.0.16"
+  }
+}

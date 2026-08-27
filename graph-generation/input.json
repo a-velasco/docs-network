@@ -1,0 +1,94 @@
+[
+        {
+            "name": "Juju",
+            "base_url": "https://canonical.com/juju/docs/juju-cli/3.6",
+            "alt_urls": [],
+            "sitemap": "graph-generation/sitemaps/juju.xml",
+            "prefix": "juju-cli"
+        },
+        {
+            "name": "Charmcraft",
+            "base_url": "https://canonical.com/juju/docs/charmcraft/4/",
+            "alt_urls": ["https://canonical-charmcraft.readthedocs-hosted.com/4/"],
+            "sitemap": "graph-generation/sitemaps/charmcraft.xml",
+            "prefix": "charmcraft"
+        },
+        {
+            "name": "Ops",
+            "base_url": "https://canonical.com/juju/docs/ops/latest/",
+            "alt_urls": [],
+            "sitemap": "graph-generation/sitemaps/ops.xml",
+            "prefix": "ops"
+        },
+        {
+            "name": "JAAS",
+            "base_url": "https://canonical.com/juju/docs/jaas/v3/",
+            "alt_urls": ["https://documentation.ubuntu.com/jaas"],
+            "sitemap": "graph-generation/sitemaps/jaas.xml",
+            "prefix": "jaas"
+        },
+        {
+            "name": "Juju TF Provider",
+            "base_url": "https://canonical.com/juju/docs/terraform-provider-juju/2.2/",
+            "alt_urls": ["https://documentation.ubuntu.com/terraform-provider-juju"],
+            "sitemap": "graph-generation/sitemaps/terraform-juju-provider.xml",
+            "color": "purple",
+            "prefix": "juju-terraform"
+        },
+        {
+            "name": "Jubilant",
+            "base_url": "https://canonical.com/juju/docs/jubilant/",
+            "alt_urls": ["https://documentation.ubuntu.com/jubilant/"],
+            "sitemap": "graph-generation/sitemaps/jubilant.xml",
+            "prefix": "jubilant"
+        },
+        {
+            "name": "Ubuntu Core",
+            "base_url": "https://documentation.ubuntu.com/core/",
+            "alt_urls": [],
+            "sitemap": "graph-generation/sitemaps/ubuntu-core.xml",
+            "prefix": "ubuntu-core"
+        },
+        {
+            "name": "Ubuntu Desktop",
+            "base_url": "https://ubuntu.com/desktop/docs/en/latest/",
+            "alt_urls": [],
+            "sitemap": "graph-generation/sitemaps/ubuntu-desktop.xml",
+            "prefix": "ubuntu-desktop"
+        },
+        {
+            "name": "Ubuntu Server",
+            "base_url": "https://ubuntu.com/server/docs/",
+            "alt_urls": [],
+            "sitemap": "graph-generation/sitemaps/ubuntu-server.xml",
+            "prefix": "ubuntu-server"
+        },
+        {
+            "name": "Ubuntu WSL",
+            "base_url": "https://ubuntu.com/wsl/docs/stable/",
+            "alt_urls": [],
+            "sitemap": "graph-generation/sitemaps/ubuntu-wsl.xml",
+            "prefix": "ubuntu-wsl"
+        },
+        {
+            "name": "Ubuntu Developers",
+            "base_url": "https://ubuntu.com/developers/docs/",
+            "alt_urls": [],
+            "sitemap": "graph-generation/sitemaps/ubuntu-developers.xml",
+            "prefix": "ubuntu-developers"
+        },
+        {
+            "name": "Snapcraft",
+            "base_url": "https://ubuntu.com/docs/snapcraft/9.0/",
+            "alt_urls": [],
+            "sitemap": "graph-generation/sitemaps/snapcraft.xml",
+            "prefix": "snapcraft"
+        },
+        {
+            "name": "Snapd",
+            "base_url": "https://snapcraft.io/docs/",
+            "alt_urls": [],
+            "sitemap": "graph-generation/sitemaps/snapd.xml",
+            "prefix": "snapd"
+        }
+    ]
