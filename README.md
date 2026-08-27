@@ -1,3 +1,6 @@
+> [!WARNING]
+> This is a very rough prototype that has been hacked together without much experience with web applications and JS. It is nowhere near "production ready".
+
 # Documentation network graph
 
 This repository contains Python script that builds a network graph of links between documentation sets, and a Node.js app that displays the result in a local webserver.
