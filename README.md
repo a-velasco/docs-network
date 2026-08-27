@@ -6,7 +6,11 @@ This repository contains Python script that builds a network graph of links betw
 
 ## Quickstart
 
-You can run the graph webapp from a precompiled build so you don't have to install Node.js or clone the repository.
+To browse the demo above, visit https://a-velasco.github.io/docs-network/
+
+To try out other doc sets, you'll need to run it locally.
+
+The easiest and quickest way is via a precompiled build, so you won't have to install or configure anything locally.
 
 Download [offline-launcher.zip](https://github.com/a-velasco/docs-network/releases/download/dev/offline-launcher.zip) and extract it somewhere locally.
 
