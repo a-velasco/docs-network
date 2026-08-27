@@ -119,7 +119,7 @@ Let's say we want to add Ubuntu Pro: https://ubuntu.com/pro/docs/
 
 First, we need to find the sitemap. Sitemaps are the source of truth for generating our node pool. In this case, it's at https://ubuntu.com/pro/docs/doc-sitemap.xml.
 
-Copy the sitemap data to a new file at `/graph-generation/sitemaps/ubuntu-pro.xml`. (This will be automated in the future, but for now I'm seeing some discrepancies between URLs and sitemaps for some doc sets that breaks things. Doing it this way for now ensures we're using the right URLs)
+Copy the sitemap data to a new file at `/graph-generation/sitemaps/ubuntu-pro.xml`. (This will be automated in the future, but for now I'm seeing some discrepancies between canonical URLs and sitemap URLs for some doc sets. Doing this manually for now ensures we're using the right URLs)
 
 Open `/graph-generation/input.json` -- this is the list of documentation sets our program has access to. Add an entry for Ubuntu Pro:
 
