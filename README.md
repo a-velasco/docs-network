@@ -6,9 +6,9 @@ This repository contains Python script that builds a network graph of links betw
 
 ## Quickstart
 
-You can run the graph webapp from a precompiled build so you don't have to install Node.js.
+You can run the graph webapp from a precompiled build so you don't have to install Node.js or clone the repository.
 
-So, no need to clone the repository - simply download [offline-launcher.zip](https://github.com/a-velasco/docs-network/releases/download/dev/offline-launcher.zip) and extract it somewhere.
+Download [offline-launcher.zip](https://github.com/a-velasco/docs-network/releases/download/dev/offline-launcher.zip) and extract it somewhere locally.
 
 Inside the `offline-launcher/` folder, run the shell script `launch-app.sh`:
 
@@ -17,7 +17,7 @@ cd offline-launcher
 . launch-app.sh
 ```
 
-This should open up a tab in your browser with the application and a demo dataset.
+This should open up a tab in your browser with the application and a demo dataset, similar to the image at the top.
 
 ## Alternative installation (with Node.js)
 
