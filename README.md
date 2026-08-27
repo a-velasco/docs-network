@@ -8,12 +8,12 @@ This repository contains Python script that builds a network graph of links betw
 
 You can run the graph webapp from a precompiled build so you don't have to install Node.js.
 
-So, no need to clone the repository - simply download docs-network-viz.zip and extract it somewhere.
+So, no need to clone the repository - simply download [offline-launcher.zip](https://github.com/a-velasco/docs-network/releases/download/dev/offline-launcher.zip) and extract it somewhere.
 
-Navigate to the `docs-network-viz/` folder and run the shell script `launch-app.sh`:
+Inside the `offline-launcher/` folder, run the shell script `launch-app.sh`:
 
 ```shell
-cd docs-network-viz
+cd offline-launcher
 . launch-app.sh
 ```
 
@@ -100,7 +100,7 @@ You can find pre-baked graph data in the `/pre-made-graphs` directory:
 * Terraform Juju
 * JAAS
 
-**If you're using the pre-built app** (from the quickstart): The application displays whatever data is located in `docs-network-viz/app/graph.json`, so copy the JSON file you're interested in, and replace `docs-network-viz/app/graph.json`. Note that it _must_ be named `graph.json`.
+**If you're using the offline launcher**: The application displays whatever data is located in `offline-launcher/app/graph.json`, so copy the JSON file you're interested in, and replace `offline-launcher/app/graph.json`. Note that it _must_ be named `graph.json`.
 
 **If you compiled the app in the repo with Node.js**: The application reads from `docs-network/graph.json`, so replace this with the JSON file you want. 
 
@@ -128,7 +128,7 @@ Open `/graph-generation/input.json` -- this is the list of documentation sets ou
       "name": "Ubuntu Pro",
       "base_url": "https://ubuntu.com/pro/docs/",
       "alt_urls": [],
-      "sitemap": "graph-generation/sitemaps/ubuntu-pro.xml",
+      "sitemap": "sitemaps/ubuntu-pro.xml",
       "prefix": "ubuntu-pro"
   },
 ```
@@ -168,6 +168,6 @@ pip3 install -r requirements.txt
 python3 main.py
 ```
 
-**If you're using the pre-built app**, then copy or move the newly generated `docs-network/graph-generation/graph.json` to `docs-network-viz/app/graph.json`. You may need to refresh the browser.
+**If you're using the pre-built app**, then copy or move the newly generated `docs-network/graph-generation/graph.json` to `offline-launcher/app/graph.json`. You may need to refresh the browser.
 
 **If you're running the app from the repo with Node.js**, then move the newly generated `docs-network/graph-generation/graph.json` to `docs-network/graph.json` and refresh the browser.
