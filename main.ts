@@ -16,9 +16,8 @@ interface State {
   hoverDepth: number;
 }
 
-/**
- * Returns or creates the top-left sidebar container to stack controls vertically.
- */
+// Returns or creates the top-left sidebar container to stack controls vertically.
+// TODO: transfer to index.html
 function getOrCreateLeftPanel(): HTMLElement {
   let panel = document.getElementById("left-controls") as HTMLElement;
   if (!panel) {
@@ -37,9 +36,8 @@ function getOrCreateLeftPanel(): HTMLElement {
   return panel;
 }
 
-/**
- * Ensures the Search Bar element exists in the DOM inside the left sidebar.
- */
+// Ensures the Search Bar element exists in the DOM inside the left sidebar.
+// TODO: transfer to index.html
 function setupSearchUI(): {
   searchInput: HTMLInputElement;
   searchSuggestions: HTMLDataListElement;
@@ -57,7 +55,7 @@ function setupSearchUI(): {
 
     inputContainer.innerHTML = `
       <label for="search-input" style="font-weight: 600; display: block; margin-bottom: 4px; font-size: 13px;">
-        Search Nodes
+        Search nodes
       </label>
       <input type="text" id="search-input" list="suggestions" placeholder="Search page..." style="width: 160px; padding: 4px 6px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px;" />
       <datalist id="suggestions"></datalist>
@@ -71,9 +69,7 @@ function setupSearchUI(): {
   return { searchInput, searchSuggestions };
 }
 
-/**
- * Creates the Hover Depth range slider dynamically inside the left sidebar stack.
- */
+// TODO: transfer to index.html
 function setupHoverDepthUI(initialDepth: number, onChange: (newDepth: number) => void) {
   const leftPanel = getOrCreateLeftPanel();
 
@@ -91,7 +87,7 @@ function setupHoverDepthUI(initialDepth: number, onChange: (newDepth: number) =>
 
   panel.innerHTML = `
     <label for="hover-depth-slider" style="font-weight: 600; display: block; margin-bottom: 4px;">
-      Hover Depth: <span id="depth-val">${initialDepth}</span> hop(s)
+      Hover depth: <span id="depth-val">${initialDepth}</span> hop(s)
     </label>
     <input type="range" id="hover-depth-slider" min="1" max="3" value="${initialDepth}" style="width: 160px; cursor: pointer;" />
   `;
@@ -106,9 +102,7 @@ function setupHoverDepthUI(initialDepth: number, onChange: (newDepth: number) =>
   });
 }
 
-/**
- * Breadth-First Search (BFS) to gather all nodes within `maxDepth` hops.
- */
+// Breadth-First Search (BFS) to gather all nodes within `maxDepth` hops.
 function getNHopNeighborhood(graph: Graph, startNode: string, maxDepth: number = 3): Set<string> {
   const visited = new Set<string>([startNode]);
   let currentLevel = [startNode];
@@ -132,9 +126,7 @@ function getNHopNeighborhood(graph: Graph, startNode: string, maxDepth: number =
   return visited;
 }
 
-/**
- * Assigns Louvain community attributes and generates a color palette for multi-member communities.
- */
+// Assigns Louvain community attributes
 function applyLouvainCommunities(graph: Graph) {
   louvain.assign(graph, { nodeCommunityAttribute: "community" });
 
@@ -157,10 +149,6 @@ function applyLouvainCommunities(graph: Graph) {
 
   return { palette, multiMemberCommunities };
 }
-
-/**
- * Renders UI checkboxes that dynamically bind and unbind WebGL contour layers for each community.
- */
 interface State {
   hoveredNode?: string;
   selectedNode?: string;
@@ -170,9 +158,8 @@ interface State {
   hoverDepth: number;
 }
 
-/**
- * Renders UI checkboxes that dynamically bind/unbind WebGL contours and update active state.
- */
+// Renders UI checkboxes that toggle WebGL contours
+// TODO: transfer to index.html
 function setupCommunityContoursUI(
   graph: Graph,
   renderer: Sigma,
@@ -246,10 +233,7 @@ function setupCommunityContoursUI(
   });
 }
 
-/**
- * Initializes state management for hover effects, persistent node selection on click,
- * and camera navigation search without custom search highlighting overrides.
- */
+// State management for hover effects, persistent node selection on click and camera nav
 function setupInteractionState(graph: Graph, renderer: Sigma): State {
   const { searchInput, searchSuggestions } = setupSearchUI();
 
@@ -267,6 +251,7 @@ function setupInteractionState(graph: Graph, renderer: Sigma): State {
   }
 
   // Search input navigation
+  // TODO: fix
   if (searchInput) {
     searchInput.addEventListener("change", () => {
       const query = searchInput.value.trim().toLowerCase();
@@ -290,7 +275,6 @@ function setupInteractionState(graph: Graph, renderer: Sigma): State {
     });
   }
 
-  // Hover Depth Controls
   setupHoverDepthUI(state.hoverDepth, (newDepth) => {
     state.hoverDepth = newDepth;
 
@@ -316,7 +300,6 @@ function setupInteractionState(graph: Graph, renderer: Sigma): State {
     renderer.refresh({ skipIndexation: true });
   });
 
-  // Click Selection Events
   renderer.on("clickNode", ({ node }) => {
     state.selectedNode = node;
     state.selectedNeighborhood = getNHopNeighborhood(graph, node, state.hoverDepth);
@@ -329,14 +312,13 @@ function setupInteractionState(graph: Graph, renderer: Sigma): State {
     renderer.refresh({ skipIndexation: true });
   });
 
-  // Dynamic Node Reducer
   renderer.setSetting("nodeReducer", (node, data) => {
     const res: Partial<NodeDisplayData> = { ...data };
     const nodeComm = String(graph.getNodeAttribute(node, "community"));
     const hasActiveCommunities = state.activeCommunities.size > 0;
     const isInActiveCommunity = hasActiveCommunities && state.activeCommunities.has(nodeComm);
 
-    // Rule 3: Active Hop Neighborhood (Hover takes precedence over Click Selection)
+    // Active neighborhood (Hover takes priority over click)
     const activeNeighborhood = state.hoveredNeighborhood || state.selectedNeighborhood;
     if (activeNeighborhood) {
       if (activeNeighborhood.has(node)) {
@@ -357,9 +339,6 @@ function setupInteractionState(graph: Graph, renderer: Sigma): State {
   return state;
 }
 
-/**
- * Initializes and binds ForceAtlas2 Web Worker layout execution.
- */
 function setupFA2Control(graph: Graph, button: HTMLButtonElement) {
   const leftPanel = getOrCreateLeftPanel();
 
@@ -370,7 +349,6 @@ function setupFA2Control(graph: Graph, button: HTMLButtonElement) {
   button.style.background = "rgba(255, 255, 255, 0.9)";
   button.style.boxShadow = "0 2px 8px rgba(0,0,0,0.15)";
   button.style.cursor = "pointer";
-  button.style.fontWeight = "300";
   button.style.fontSize = "13px";
 
   // Insert button right after search input
@@ -385,10 +363,10 @@ function setupFA2Control(graph: Graph, button: HTMLButtonElement) {
 
   const settings = {
     ...inferred,
-    gravity: 1.0,            // Pulls clusters toward the origin (default ~1.0)
-    strongGravityMode: true, // Forces strong central pull regardless of distance
-    scalingRatio: 8.0,       // Lower values reduce global cluster repulsion
-    linLogMode: false,       // Turn off if enabled; LinLog drastically pushes clusters apart
+    gravity: 1.0,
+    strongGravityMode: true,
+    scalingRatio: 8.0,
+    linLogMode: false,
   };
 
   const fa2Layout = new FA2Layout(graph, { settings });
@@ -397,17 +375,17 @@ function setupFA2Control(graph: Graph, button: HTMLButtonElement) {
 
   function stop() {
     fa2Layout.stop();
-    button.textContent = "Start Force Atlas 2";
+    button.textContent = "Simulate graph forces";
     button.classList.remove("active");
     if (autoStopTimer) clearTimeout(autoStopTimer);
   }
 
   function start() {
     fa2Layout.start();
-    button.textContent = "Stop Force Atlas 2";
+    button.textContent = "Stop simulating"; // TODO: fix disappearing text
     button.classList.add("active");
 
-    autoStopTimer = setTimeout(stop, 100000);
+    autoStopTimer = setTimeout(stop, 10000);
   }
 
   button.addEventListener("click", () => {
@@ -419,9 +397,6 @@ function setupFA2Control(graph: Graph, button: HTMLButtonElement) {
   });
 }
 
-/**
- * Main Application Entry Point
- */
 async function init() {
   try {
     const response = await fetch("graph.json");
@@ -429,6 +404,20 @@ async function init() {
 
     const graph = new Graph();
     graph.import(data);
+
+    // Force one short Force Atlas 2 layout computation on init
+    const inferred = forceAtlas2.inferSettings(graph);
+    const settings = {
+      ...inferred,
+      gravity: 1.0,
+      strongGravityMode: true,
+      scalingRatio: 8.0,
+    };
+
+    forceAtlas2.assign(graph, {
+      iterations: 100,
+      settings: settings,
+    });
 
     const { palette, multiMemberCommunities } = applyLouvainCommunities(graph);
 

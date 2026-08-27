@@ -12,13 +12,11 @@ from bs4 import BeautifulSoup
 
 
 def normalize_url(url: str) -> str:
-    """Strips query parameters, fragments, and trailing slashes for unified URL keys."""
     if not url:
         return ""
     p = urlparse(url)
     path = p.path.rstrip('/')
     return urlunparse((p.scheme, p.netloc, path, '', '', ''))
-
 
 @dataclass
 class SiteConfig:
@@ -33,8 +31,7 @@ class SiteConfig:
         self.base_url = normalize_url(self.base_url)
         self.alt_urls = [normalize_url(u) for u in self.alt_urls if u]
 
-
-class SitemapGraphBuilder:
+class GraphBuilder:
     def __init__(self, sites_config: List[dict], max_workers: int = 20):
         self.sites: List[SiteConfig] = [SiteConfig(**s) for s in sites_config]
         self.max_workers = max_workers
@@ -57,7 +54,7 @@ class SitemapGraphBuilder:
         for node in self.valid_nodes:
             self.graph.add_node(node)
 
-        print(f"\n[Sitemaps completed] Total unique nodes registered: {len(self.valid_nodes)}\n")
+        print(f"\n[Sitemaps completed] Total unique nodes found: {len(self.valid_nodes)}\n")
 
     def _parse_sitemap(self, sitemap_path: str) -> Set[str]:
         urls = set()
@@ -78,12 +75,13 @@ class SitemapGraphBuilder:
                     norm = normalize_url(loc)
                     if norm:
                         urls.add(norm)
+
         except Exception as e:
             print(f"  [Error] Failed to read sitemap '{sitemap_path}': {e}")
+
         return urls
 
     def _resolve_redirect(self, url: str) -> Optional[str]:
-        """Resolves target URL redirects using an in-memory thread-safe cache."""
         with self._cache_lock:
             if url in self._redirect_cache:
                 return self._redirect_cache[url]
@@ -103,6 +101,7 @@ class SitemapGraphBuilder:
         return resolved
 
     def _process_page(self, url: str) -> List[Tuple[str, str]]:
+        """Finds and returns all valid links (edges) from a page's HTML."""
         edges = []
         try:
             res = requests.get(url, timeout=8)
@@ -179,7 +178,7 @@ class SitemapGraphBuilder:
         print(f"\n[Processing Completed] Discovered {self.graph.number_of_edges()} unique edge connections.\n")
 
     def export_graphology_json(self, output_file: str = "graph.json") -> None:
-        """Exports graph to Graphology JSON format with randomized node positions."""
+        """Exports graph to Graphology JSON format with random node starting positions."""
         print(f"=== [STEP 3] Exporting Graph to '{output_file}' ===")
         graphology_data = {
             "options": {"type": "directed", "multi": False},
