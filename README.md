@@ -50,9 +50,9 @@ On the top left side of the UI, the **Search nodes** box lets you search for nod
 For example, the node for `snapcraft.io/docs/reference/administration/network-requirements/` will have the label `snapd:network-requirements`.
 
 The **Simulate graph forces** button will activate a [Force Atlas 2 calculation](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0098679) with some arbitrary settings I made up because it looked cool.
-It'll stop moving automatically after a few seconds, but to stop it yourself just click the button again. The button goes blank while the simulation is active - that's normal. I have no idea why.
+It'll stop moving automatically after a few seconds, but to stop it yourself just click the button again. (Known bug: the button text disappears while the simulation is active)
 
-**Hover depth** defines what counts as a neighbor when you hover over a node. By default it's set to 1, so if you hover over a node, all other nodes will get muted except for the ones immediately connected to it.
+**Hover depth** defines what counts as a neighbor when you hover over a node to see its neighborhood. By default it's set to 1, so if you hover over a node, all other nodes will get muted except for the ones immediately connected to it.
 If you increase hover depth to 2 hops, then hovering over that same node will include the nodes connected to it, and the nodes connected to _those_.
 
 > [!TIP]
@@ -62,19 +62,19 @@ On the top right side, there is a list of numbered "communities" you can toggle.
 
 <img width="679" height="519" alt="image" src="https://github.com/user-attachments/assets/fa4fce09-7764-41a6-b1ef-1ab89dbf58c6" />
 
-In a nutshell, it assigns "communities" of based on how influential nodes are to the topology of the rest of their community. As expected, it tends to extract communities that encompass a large majority of nodes from one doc set. It's interesting to see which parts of that doc set are excluded into a different community, presumably due to lower interconnectedness. 
+It finds "communities" based on how influential nodes are to the topology of the rest of their community. As expected, the resulting communities tend to encompass a large majority of nodes from one doc set. It's interesting to see which parts of that doc set are excluded into a different community, presumably due to lower interconnectedness. 
 
 ## Load other documentation sets
 
 We can do this the easy way, or the hard way. (I've always wanted to say that)
 
-The easy way is using existing graph files I've already generated for a few doc sets in the Ubuntu and Juju worlds.
+The easy way to visualize other doc sets is using existing graph files I've already generated for a few doc sets in the Ubuntu and Juju worlds.
 
-If you want to add a doc set that isn't included, we'll have to go the _hard way_.
+If you want to add a doc set that I haven't included yet, we'll have to go the _hard way_.
 
 ### Existing graph files
 
-You can find pre-baked graph data in the `/pre-made-graphs` directory:
+You can find pre-baked graph data in the `/pre-made-graphs` directory of both the repository and the offline-launcher:
 
 `/pre-made-graphs/ubuntu.json`:
 * Ubuntu Core
@@ -83,7 +83,7 @@ You can find pre-baked graph data in the `/pre-made-graphs` directory:
 * Ubuntu WSL
 * Ubuntu for Developers
 
-`/pre-made-graphs/ubuntu-and-snap.json`:
+`/pre-made-graphs/ubuntu-and-snap.json` (original demo):
 * (everything from `ubuntu.json`)
 * Snapd
 * Snapcraft
