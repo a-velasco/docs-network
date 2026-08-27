@@ -12,7 +12,7 @@ To try out other doc sets, you'll need to run it locally.
 
 The easiest and quickest way is via a precompiled build, so you won't have to install or configure anything locally.
 
-Download [offline-launcher.zip](https://github.com/a-velasco/docs-network/releases/download/dev/offline-launcher.zip) and extract it somewhere locally.
+Download [offline-launcher.zip](https://github.com/a-velasco/docs-network/releases/download/dev/offline-launcher.zip) and extract it somewhere.
 
 Inside the `offline-launcher/` folder, run the shell script `launch-app.sh`:
 
